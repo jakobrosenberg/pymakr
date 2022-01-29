@@ -9,8 +9,9 @@ class Terminal {
   /**
    *
    * @param {PyMakr} pyMakr
+   * @param {import('./interfaces/Base').BaseInterface} _interface
    */
-  constructor(pyMakr) {
+  constructor(pyMakr, _interface) {
     const termPath = resolve(process.cwd(), __dirname + "/utils/terminalExec.js");
 
     /** @type {'connecting'|'connected'|'closed'|'failed'} */
@@ -27,8 +28,8 @@ class Terminal {
   }
 
   connect() {
+    if (!this.connectionAttempts) this.log.info(`Connecting...`);
     this.connectionAttempts++;
-    this.log.info(`Connecting... (${this.connectionAttempts})`);
     this.stream = new Socket();
     const reconnect = once(() => setTimeout(this.connect.bind(this), 200));
 
@@ -42,12 +43,14 @@ class Terminal {
 
     this.stream.on("connect", (err) => {
       this.log.info(err ? "Failed to connect" : "Connected.");
-      if (!err) this.status = "connected";
-      this.term.sendText("foobar");
+      if (err) this.log.error(err);
+      else this.status = "connected";
     });
     this.stream.on("error", (err) => {
-      this.log.warn("Error while connecting to term");
-      this.log.error(err);
+      if (this.status !== "connecting") {
+        this.log.warn("Error while connecting to term");
+        this.log.error(err);
+      }
       reconnect();
     });
     this.stream.on("timeout", () => {
@@ -61,9 +64,17 @@ class Terminal {
     this.stream.on("end", () => {
       this.log.warn("Connection ended ");
     });
-    this.stream.on("data", function (data) {
+    this.stream.on("data", (data) => {
       console.log("received data", data);
-      _this.userInput(data);
+      // _this.userInput(data);
+      // this.term.sendText(data.toString())
+      // _this.pyboard.send_user_input(input,function(err){
+      //   if(err && err.message == 'timeout'){
+      //     _this.logger.warning("User input timeout, disconnecting")
+      //     _this.logger.warning(err)
+      //     _this.disconnect()
+      //   }
+      // })
     });
   }
 }

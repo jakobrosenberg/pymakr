@@ -19,6 +19,7 @@ const createDevicesStore = (pyMakr) => {
 
   const refresh = async () => store.set(await getDevices(pyMakr));
   refresh();
+  // setInterval(refresh, 1000)
 
   return { ...store, refresh };
 };
