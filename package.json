@@ -417,7 +417,8 @@
     "test": "node ./test/runTest.js",
     "mctl": "mctl",
     "test:unit": "probs src",
-    "test-watch:unit": "npx nodemon --exec npm run test:unit"
+    "test-watch:unit": "npx nodemon --exec npm run test:unit",
+    "semantic-release": "semantic-release"
   },
   "devDependencies": {
     "@types/glob": "^7.2.0",
