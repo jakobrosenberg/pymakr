@@ -18,6 +18,13 @@
   ],
   "main": "./extension.js",
   "release": {
+    "branches": [
+      "master",
+      {
+        "name": "alpha",
+        "prerelease": true
+      }
+    ],
     "verifyConditions": [
       "semantic-release-vsce",
       "@semantic-release/github"
