@@ -3,21 +3,18 @@
   "displayName": "PyMakr",
   "publisher": "Pycom",
   "description": "",
-  "version": "2.0.0-alpha.0",
+  "version": "2.0.0-alpha.7",
   "engines": {
     "vscode": "^1.62.0"
   },
   "categories": [
     "Other"
   ],
-  "repository": {
-    "url": "https://github.com/jakobrosenberg/pymakr"
-  },
+  "repository": "https://github.com/jakobrosenberg/pymakr",
   "activationEvents": [
     "*"
   ],
   "main": "./extension.js",
-
   "contributes": {
     "configuration": {
       "title": "PyMakr",
