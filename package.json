@@ -34,7 +34,6 @@
     },
     "publish": [
       {
-        "path": "@semantic-release/github",
         "assets": "*.vsix"
       }
     ]
