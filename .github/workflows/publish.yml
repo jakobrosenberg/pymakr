@@ -29,5 +29,5 @@ jobs:
         run: npm run semantic-release -- --debug
         env:
           # VSCE_PAT: ${{ secrets.PUBLISHER_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.ADMIN_TOKEN }}
           GH_TOKEN: ${{ secrets.ADMIN_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
